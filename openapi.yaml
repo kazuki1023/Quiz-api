@@ -105,6 +105,26 @@ paths:
                 type: array
                 items: 
                   $ref: "#/components/schemas/quizWithChoices"
+    delete:
+      summary: delete(soft) a quiz
+      deprecated: false
+      parameters:
+        - name: id
+          in: path
+          description: "quizを削除された"
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: "成功!"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/quizWithChoices"
 
 components:
   securitySchemes:
