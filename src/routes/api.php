@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\QuizController;
+use App\Http\Controllers\Api\V1\QuizController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
