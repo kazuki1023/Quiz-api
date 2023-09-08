@@ -53,17 +53,29 @@ class QuizController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(QuizRequest $request, string $id)
     {
-        //
+        $data = $request->validated();
+        $quiz = Quiz::findOrFail($id);
+        $quiz->update([
+            'content' => $data['content'],
+            'img' => $data['img'],
+        ]);
+        // choicesがうまく更新できてないよ
+        foreach ($data['choices'] as $choiceData) {
+            if (isset($choiceData['id']) && isset($choiceData['quiz_id'])) {
+                // 既存のchoiceを更新
+                $choice = $quiz->choices()->find($choiceData['id']);
+                if ($choice) {
+                    $choice->update($choiceData);
+                }
+            }
+        }
+        return QuizResource::make($quiz->load('choices'));
     }
 
     /**
