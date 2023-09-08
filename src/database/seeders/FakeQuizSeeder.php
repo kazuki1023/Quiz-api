@@ -15,7 +15,7 @@ class FakeQuizSeeder extends Seeder
      */
     public function run(): void
     {
-        Quiz::factory(100)->create()->each(function ($question) {
+        Quiz::factory(100)->create()->each(function ($quiz) {
             // ランダムに正解の選択肢の位置を決定
             $validPosition = rand(0, 2);
 
@@ -23,7 +23,7 @@ class FakeQuizSeeder extends Seeder
                 // 決定した位置の時だけvalidを1に、それ以外は0に設定
                 $valid = $i === $validPosition ? 1 : 0;
 
-                Choice::factory()->create(['question_id' => $question->id , 'valid' => $valid]);
+                Choice::factory()->create(['quiz_id' => $quiz->id , 'valid' => $valid]);
             }
         });
     }

@@ -16,22 +16,19 @@ class QuizSeeder extends Seeder
         $quiz = [
             [
                 'content' => 'この中で一緒の縦モクになったことない人は誰？',
-                'image' => "sample1.jpg",
-                'supplement' => '夏のDXなつかし〜',
+                'img' => "sample1.jpg",
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'content' => 'dukkenとかずは同じ中高ですが、そんなdukkenと初めてクラスが一緒になったのはいつ？',
-                'image' => "sample2.jpg",
-                'supplement' => 'シンハ運営の時代',
+                'img' => "sample2.jpg",
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'content' => 'posse1で付き合うなら誰？って聞かれた時にいつも答えてる人は誰？',
-                'image' => "sample3.jpg",
-                'supplement' => 'これいつの写真？',
+                'img' => "sample3.jpg",
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
