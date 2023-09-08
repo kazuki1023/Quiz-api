@@ -5,7 +5,7 @@ info:
   version: "1.0.0"
 
 servers:
-  - url: "http://localhost/"
+  - url: "http://localhost/api/v1"
     description: "検証環境"
 
 paths: 
