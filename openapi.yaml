@@ -228,6 +228,18 @@ components:
         valid:
           type: boolean
           example: true
+        created_at:
+          type: string
+          format: date-time
+          example: 2023-01-01T00:00:00Z
+        updated_at:
+          type: string
+          format: date-time
+          example: 2023-01-01T00:00:00Z
+        deleted_at:
+          type: string
+          format: date-time
+          example: 2023-01-01T00:00:00Z
     quizWithChoices:
       type: object
       properties:
