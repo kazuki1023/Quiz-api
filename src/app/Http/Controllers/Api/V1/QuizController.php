@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
+use App\Http\Requests\QuizRequest;
 use App\Http\Resources\QuizResource;
 
 class QuizController extends Controller
@@ -22,9 +23,23 @@ class QuizController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(QuizRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $quiz = Quiz::create([
+            'content' => $data['content'],
+            'img' => $data['img'],
+        ]);
+
+        foreach ($data['choices'] as $choiceData) {
+            $quiz->choices()->create([
+                'answer' => $choiceData['answer'],
+                'valid' => $choiceData['valid'],
+            ]);
+        }
+
+        return QuizResource::make($quiz->load('choices'));
     }
 
     /**
