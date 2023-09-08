@@ -108,6 +108,9 @@ paths:
     delete:
       summary: delete(soft) a quiz
       deprecated: false
+      security:
+        - Auth0:
+            - write:quizzes
       parameters:
         - name: id
           in: path
