@@ -23,7 +23,7 @@ class QuizRequest extends FormRequest
     {
         return [
             'content' => 'required|string|max:255',
-            'img' => 'required|image',
+            'img' => 'required|string',
             'choices.*.answer' => 'required|string|max:255',
             'choices.*.valid' => 'required|boolean',
         ];
