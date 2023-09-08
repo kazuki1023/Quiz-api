@@ -22,10 +22,18 @@ paths:
                 type: array
                 items: 
                   $ref: "#/components/schemas/quizWithChoices"
+        "400":
+          description: "Bad Request"
+        "500":
+          description: "Server Error"
+
   "/quiz":
     get:
       summary: get all quiz for admin
       deprecated: false
+      security:
+        - Auth0:
+            - read:quizzes
       responses:
         "200":
           description: "成功！"
@@ -35,6 +43,11 @@ paths:
                 type: array
                 items: 
                   $ref: "#/components/schemas/quizWithChoices"
+        "400":
+          description: "Bad Request"
+        "500":
+          description: "Server Error"
+        
     post:
       summary: create new quiz by admin
       deprecated: false
@@ -56,7 +69,10 @@ paths:
                 type: array
                 items: 
                   $ref: "#/components/schemas/quizWithChoices"
-
+        "400":
+          description: "Bad Request"
+        "500":
+          description: "Server Error"
 
   "/quiz/{id}":
     get:
@@ -72,16 +88,21 @@ paths:
             format: int64
       security:
         - Auth0:
-            - write:quizzes
+            - read:quizzes
       responses:
         "200":
           description: "成功!"
           content:
             application/json:
               schema:
-                type: array
-                items: 
-                  $ref: "#/components/schemas/quizWithChoices"
+                $ref: "#/components/schemas/quizWithChoices"
+        "400":
+          description: "Bad Request"
+        "404":
+          description: "Not Found"
+        "500":
+          description: "Server Error"
+
     put:
       summary: update a quiz by admin
       deprecated: false
@@ -93,6 +114,12 @@ paths:
           schema:
             type: integer
             format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/quizWithChoices"
       security:
         - Auth0:
             - write:quizzes
@@ -102,9 +129,14 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items: 
-                  $ref: "#/components/schemas/quizWithChoices"
+                $ref: "#/components/schemas/quizWithChoices"
+        "400":
+          description: "Bad Request"
+        "404":
+          description: "Not Found"
+        "500":
+          description: "Server Error"
+
     delete:
       summary: delete(soft) a quiz
       deprecated: false
@@ -125,9 +157,13 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/quizWithChoices"
+                $ref: "#/components/schemas/quizWithChoices"
+        "400":
+          description: "Bad Request"
+        "404":
+          description: "Not Found"
+        "500":
+          description: "Server Error"
 
 components:
   securitySchemes:
