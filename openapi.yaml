@@ -35,8 +35,38 @@ paths:
                 type: array
                 items: 
                   $ref: "#/components/schemas/quizWithChoices"
-
+    post:
+      summary: create new quiz by admin
+      deprecated: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/quizWithChoices"
+      security:
+        - Auth0:
+            - write:quizzes
+      responses:
+        "200":
+          description: "成功!"
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/quizWithChoices"
 components:
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://YOUR-DOMAIN.auth0.com/authorize
+          tokenUrl: https://YOUR-DOMAIN.auth0.com/oauth/token
+          scopes:
+            read:quizzes: "Read quizzes"
+            write:quizzes: "Write quizzes"
   schemas:
     quiz:
       type: object
@@ -98,4 +128,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/choice'
-
