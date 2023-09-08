@@ -102,3 +102,5 @@
 docker compose exec app sh
 ./vendor/bin/phpstan analyse
 ```
+### 型チェック
+[参考サイト](https://blog.jobins.jp/level-up-your-laravel-code-with-phpstan#heading-level-7)に従い、レベル７で型チェックを行なっていく
