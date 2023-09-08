@@ -47,7 +47,7 @@ class QuizController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return QuizResource::make(Quiz::findOrFail($id)->load('choices'));
     }
 
     /**
