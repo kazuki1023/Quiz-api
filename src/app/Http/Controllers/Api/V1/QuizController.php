@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Models\Quiz;
 use Illuminate\Http\Request;
+use App\Http\Resources\QuizResource;
 
 class QuizController extends Controller
 {
@@ -12,16 +14,10 @@ class QuizController extends Controller
      */
     public function index()
     {
-        //
+        $quizzes = Quiz::with('choices')->get();
+        return QuizResource::collection($quizzes);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
