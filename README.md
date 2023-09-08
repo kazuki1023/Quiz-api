@@ -96,3 +96,9 @@
     2019_12_14_000001_create_personal_access_tokens_table ....................... 196ms DONE
     ```
 
+## larastan
+### 解析方法
+```
+docker compose exec app sh
+./vendor/bin/phpstan analyse
+```
