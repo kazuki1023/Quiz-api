@@ -96,38 +96,3 @@
     2019_12_14_000001_create_personal_access_tokens_table ....................... 196ms DONE
     ```
 
-# Breeze インストール方法 PHP側
-1. appコンテナに入っていることを確認
-    - (入っていなければ、`docker compose exec app sh`)
-2. `composer require laravel/breeze --dev`
-3. `php artisan breeze:install` を入力し、選択肢は以下の通り
-    - `Which stack would you like to install?` : 0 (blade)
-    - `Would you like to install dark mode support?` : no
-    - `Would you prefer Pest tests instead of PHPUnit?` : no
-
-<img width="1054" alt="breeze install php" src="https://github.com/posse-ap/template-ph3-website/assets/33271639/fdc2377a-df2a-486d-83f4-2232b40151e2">
-
-
-# Breeze インストール方法 NODE側
-
-1. `src/package.json` の内容のscripts部分を以下のように変更する
-    - 変更点としてはdevの`"vite"`のみだったのが `"vite --host"` というhostオプションを付け足しています
-    ```json
-        "scripts": {
-            "dev": "vite --host",
-            "build": "vite build"
-    },
-    ```
-
-2. nodeコンテナに入っていることを確認
-   - (入っていなければ、`docker compose exec node sh`)
-3. `npm install`
-4. `npm run dev` or `npm run build`
-    - buildは現時点のファイルを読み込んでファイルを生成します (build後にtailwindのクラス名を追加した場合は再度buildが必要です)
-    - devは変更点をずっと監視しつづけるのでスペックがギリギリだとパソコンに負荷がかかるかもなので、見た目の編集しないときはbuildを利用してください
-
-# # Breeze インストール方法 画面確認
-1. トップページの右上に `Log in` `Register` が表示されていることを確認
-2. `Log in` を押すとフォームが正常に表示されていること
-
-<img width="1020" alt="ログイン画面" src="https://github.com/posse-ap/template-ph3-website/assets/33271639/45729c65-e442-43a4-abff-1ad4240ba5fe">
