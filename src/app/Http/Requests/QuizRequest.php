@@ -22,10 +22,14 @@ class QuizRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id' => 'required|integer',
             'content' => 'required|string|max:255',
             'img' => 'required|string',
+            'choices.*.id' => 'required|integer',
+            'choices.*.quiz_id' => 'required|integer',
             'choices.*.answer' => 'required|string|max:255',
             'choices.*.valid' => 'required|boolean',
+            'choices.*.deleted_at' => 'nullable',
         ];
     }
 }

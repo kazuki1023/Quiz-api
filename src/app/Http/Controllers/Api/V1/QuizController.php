@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
 use App\Http\Requests\QuizRequest;
@@ -65,16 +66,14 @@ class QuizController extends Controller
             'content' => $data['content'],
             'img' => $data['img'],
         ]);
+        return $data;
         // choicesがうまく更新できてないよ
         foreach ($data['choices'] as $choiceData) {
-            if (isset($choiceData['id']) && isset($choiceData['quiz_id'])) {
-                // 既存のchoiceを更新
                 $choice = $quiz->choices()->find($choiceData['id']);
                 if ($choice) {
                     $choice->update($choiceData);
                 }
             }
-        }
         return QuizResource::make($quiz->load('choices'));
     }
 
