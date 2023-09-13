@@ -1,0 +1,251 @@
+openapi: "3.0.3"
+
+info:
+  title: "Quiz Api"
+  version: "1.0.0"
+
+servers:
+  - url: "http://localhost/api/v1"
+    description: "検証環境"
+
+paths: 
+  "/":
+    get:
+      summary: get all quiz for user
+      deprecated: false
+      responses:
+        "200":
+          description: "成功！"
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/quizWithChoices"
+        "400":
+          description: "Bad Request"
+        "500":
+          description: "Server Error"
+
+  "/quiz":
+    get:
+      summary: get all quiz for admin
+      deprecated: false
+      security:
+        - Auth0:
+            - read:quizzes
+      responses:
+        "200":
+          description: "成功！"
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/quizWithChoices"
+        "400":
+          description: "Bad Request"
+        "500":
+          description: "Server Error"
+        
+    post:
+      summary: create new quiz by admin
+      deprecated: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/quizWithChoices"
+      security:
+        - Auth0:
+            - write:quizzes
+      responses:
+        "200":
+          description: "成功!"
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/quizWithChoices"
+        "400":
+          description: "Bad Request"
+        "500":
+          description: "Server Error"
+
+  "/quiz/{id}":
+    get:
+      summary: get a quiz by admin
+      deprecated: false
+      parameters:
+        - name: id
+          in: path
+          description: "１件取得したいんよね"
+          required: true
+          schema:
+            type: integer
+            format: int64
+      security:
+        - Auth0:
+            - read:quizzes
+      responses:
+        "200":
+          description: "成功!"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/quizWithChoices"
+        "400":
+          description: "Bad Request"
+        "404":
+          description: "Not Found"
+        "500":
+          description: "Server Error"
+
+    put:
+      summary: update a quiz by admin
+      deprecated: false
+      parameters:
+        - name: id
+          in: path
+          description: "１件更新したいんよね"
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/quizWithChoices"
+      security:
+        - Auth0:
+            - write:quizzes
+      responses:
+        "200":
+          description: "成功!"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/quizWithChoices"
+        "400":
+          description: "Bad Request"
+        "404":
+          description: "Not Found"
+        "500":
+          description: "Server Error"
+
+    delete:
+      summary: delete(soft) a quiz
+      deprecated: false
+      security:
+        - Auth0:
+            - write:quizzes
+      parameters:
+        - name: id
+          in: path
+          description: "quizを削除された"
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: "成功!"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/quizWithChoices"
+        "400":
+          description: "Bad Request"
+        "404":
+          description: "Not Found"
+        "500":
+          description: "Server Error"
+
+components:
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://YOUR-DOMAIN.auth0.com/authorize
+          tokenUrl: https://YOUR-DOMAIN.auth0.com/oauth/token
+          scopes:
+            read:quizzes: "Read quizzes"
+            write:quizzes: "Write quizzes"
+  schemas:
+    quiz:
+      type: object
+      required:
+        - id
+        - content
+        - img
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        content:
+          type: string
+          example: "gitとgithubの違いって何？"
+        img:
+          type: string
+          example: "image.jpg"
+        created_at:
+          type: string
+          format: date-time
+          example: 2023-01-01T00:00:00Z
+        updated_at:
+          type: string
+          format: date-time
+          example: 2023-01-01T00:00:00Z
+        deleted_at:
+          type: string
+          format: date-time
+          example: 2023-01-01T00:00:00Z
+    choice:
+      type: object
+      required: 
+        - id
+        - quiz_id
+        - answer
+        - valid
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        quiz_id:
+          type: integer
+          format: int64
+          example: 1
+        answer:
+          type: string
+          example: "mailとgmailの違いと一緒"
+        valid:
+          type: boolean
+          example: true
+        created_at:
+          type: string
+          format: date-time
+          example: 2023-01-01T00:00:00Z
+        updated_at:
+          type: string
+          format: date-time
+          example: 2023-01-01T00:00:00Z
+        deleted_at:
+          type: string
+          format: date-time
+          example: 2023-01-01T00:00:00Z
+    quizWithChoices:
+      type: object
+      properties:
+        quiz:
+          $ref: '#/components/schemas/quiz'
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/choice'
