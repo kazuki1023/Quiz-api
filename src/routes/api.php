@@ -23,3 +23,11 @@ Route::prefix('/v1')->group(function () {
     Route::apiResource('/quiz', QuizController::class);
     Route::get('/', [QuizController::class, 'index']);
 });
+
+
+// Route::middleware(['auth:api', 'role:admin'])->group(function () {
+//     Route::prefix('/v1')->group(function () {
+//         Route::apiResource('/quiz', QuizController::class);
+//         Route::get('/', [QuizController::class, 'index']);
+//     });
+// });
