@@ -171,8 +171,8 @@ components:
       type: oauth2
       flows:
         authorizationCode:
-          authorizationUrl: https://YOUR-DOMAIN.auth0.com/authorize
-          tokenUrl: https://YOUR-DOMAIN.auth0.com/oauth/token
+          authorizationUrl: https://dev-qy444555oaxj3y6p.jp.auth0.com/authorize
+          tokenUrl: https://dev-qy444555oaxj3y6p.jp.auth0.com/oauth/token
           scopes:
             read:quizzes: "Read quizzes"
             write:quizzes: "Write quizzes"
@@ -182,7 +182,6 @@ components:
       required:
         - id
         - content
-        - img
       properties:
         id:
           type: integer
@@ -209,7 +208,6 @@ components:
     choice:
       type: object
       required: 
-        - id
         - quiz_id
         - answer
         - valid

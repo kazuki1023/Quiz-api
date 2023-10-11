@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
             [
                 QuizSeeder::class,
                 ChoiceSeeder::class,
-                FakeQuizSeeder::class,
             ]);
     }
 }
