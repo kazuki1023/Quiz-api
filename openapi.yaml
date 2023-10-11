@@ -182,7 +182,6 @@ components:
       required:
         - id
         - content
-        - img
       properties:
         id:
           type: integer
@@ -209,7 +208,6 @@ components:
     choice:
       type: object
       required: 
-        - id
         - quiz_id
         - answer
         - valid

@@ -64,7 +64,7 @@ class QuizController extends Controller
         $quiz = Quiz::findOrFail($id);
         $quiz->update([
             'content' => $data['content'],
-            'img' => $data['img'],
+            'img' => isset($data['img']) ? $data['img'] : null,
         ]);
         return $data;
         // choicesがうまく更新できてないよ

@@ -24,8 +24,8 @@ class QuizRequest extends FormRequest
         return [
             'id' => 'required|integer',
             'content' => 'required|string|max:255',
-            'img' => 'required|string',
-            'choices.*.id' => 'required|integer',
+            'img' => 'string',
+            'choices.*.id' => 'integer',
             'choices.*.quiz_id' => 'required|integer',
             'choices.*.answer' => 'required|string|max:255',
             'choices.*.valid' => 'required|boolean',
